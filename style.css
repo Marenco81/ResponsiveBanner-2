@@ -25,6 +25,71 @@ header{
     font-weight: 800;
     letter-spacing: 5px;
 }
+header div a{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #eee;
+    background-color: #636363;
+    padding: 5px;
+    border-radius: 10px;
+    transition: color 0.6s ease-in-out;
+}
+
+@property --fill{
+    syntax: '<percentage>';
+    inherits: true;
+    initial-value: 0%;
+}
+
+a::before,
+a::after {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    inset: -5px;
+    border-radius: inherit;
+    background: 
+        conic-gradient(
+            currentColor var(--fill),
+            transparent var(--fill)
+        );
+    transition: --fill .6s 0.3s ease-in-out ;    
+}
+a:hover,
+a:focus-visible,
+a:focus-within {
+    color: greenyellow;
+    outline: 1px solid transparent;
+}
+a:hover,
+a:hover::before,
+a:hover::after {
+    transition-delay: 0s;
+}
+/* Effect 1 */
+.left:hover,
+.left:focus-visible,
+.left:focus-within{
+    --fill: 100%
+}
+.left::before{
+    transform: rotateY(180deg);
+}
+.left::after{
+    display: none;
+}
+/* Effect 2 */
+.right:hover,
+.right:focus-visible,
+.right:focus-within{
+    --fill: 100%
+}
+.right::after{
+    display: none;
+}
 .banner{
     background-image: url(/Image.jpg);
     width: 100%;
@@ -34,6 +99,7 @@ header{
     background-position: center;
     background-size: cover;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -65,12 +131,37 @@ header{
 .banner .content div:nth-child(3){
     text-align: center;
 }
-.banner .content div button{
+.cta{
     border: 1px solid #eee7;
-    background-color: transparent;
+    border-radius: 10px;
+    background-color: #636363;
+    text-decoration: none;
     color: #eee;
+    font-weight: 800;
+    font-size: 1.8rem;
     padding: 10px 20px;
     letter-spacing: 5px;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+.cta:hover,
+.cta:focus-visible,
+.cta:focus-within {
+    color: greenyellow;
+    outline: 1px solid transparent;
+}
+/* Effect 3 */
+.cta:hover,
+.cta:focus-visible,
+.cta:focus-within{
+    --fill: 50%
+}
+.cta::before{
+    transform: rotateX(180deg);
+}
+.cta::after{
+    transform: rotate(180deg);
 }
 @media screen and (max-width: 1200px){
     .banner .content{
